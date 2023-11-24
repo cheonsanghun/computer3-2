@@ -24,6 +24,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'car_control_node = ros2_term_project.car_control_node:main',
+            
         ],
     },
 )

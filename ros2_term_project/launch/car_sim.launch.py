@@ -52,5 +52,62 @@ def generate_launch_description():
     ld.add_action(gazebo_run)
 
     # spawn prius_hybrid
+    spawn_entity_node_pr001 = Node(
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        name='spawn_entity_pr001',
+        output='screen',
+        arguments=[
+            '-database', 'prius_hybrid',
+            '-entity', 'PR001',
+            '-x', '93',
+            '-y', '-11.7',
+            '-Y', '-1.57'
+        ]
+    )
+    ld.add_action(spawn_entity_node_pr001)
+
+    spawn_entity_node_pr002 = Node(
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        name='spawn_entity_pr002',
+        output='screen',
+        arguments=[
+            '-database', 'prius_hybrid',
+            '-entity', 'PR002',
+            '-x', '93',
+            '-y', '-15.9',
+            '-Y', '-1.57'
+        ]
+    )
+    ld.add_action(spawn_entity_node_pr002)
+
+
+
+    # 카메라 컨트롤러 추가 - PR001
+    camera_controller_pr001 = Node(
+        package='camera_controller_package',  # 카메라 컨트롤러 패키지 이름으로 수정
+        executable='camera_controller_node',
+        name='camera_controller_pr001',
+        output='screen',
+        parameters=[
+            {'camera_name': 'prius_camera_pr001'},
+            # 추가적인 카메라 컨트롤러 파라미터 설정
+        ]
+    )
+    ld.add_action(camera_controller_pr001)
+
+    # 카메라 컨트롤러 추가 - PR002
+    camera_controller_pr002 = Node(
+        package='camera_controller_package',  # 카메라 컨트롤러 패키지 이름으로 수정
+        executable='camera_controller_node',
+        name='camera_controller_pr002',
+        output='screen',
+        parameters=[
+            {'camera_name': 'prius_camera_pr002'},
+            # 추가적인 카메라 컨트롤러 파라미터 설정
+        ]
+    )
+    ld.add_action(camera_controller_pr002)
 
     return ld
